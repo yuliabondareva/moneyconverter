@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$exchangeRatesOut = json_decode($jsonOut, true);
 	$myCurIn = 'USD'.$currencies;
 	$myCurOut = 'USD'.$sourceid;
-	$exchangeIn = $exchangeRatesIn['quotes'][$myCurIn]."<br>";
+	$exchangeIn = $exchangeRatesIn['quotes'][$myCurIn];
 	$exchangeOut = $exchangeRatesOut['quotes'][$myCurOut];
 	$myCurFun = $exchangeIn/$exchangeOut*$ammount;
 	$crossCur = round($myCurFun, 2);

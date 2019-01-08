@@ -1,23 +1,23 @@
 
 /*$('#convert').on('click', function() {
-	$.ajax({
-		type: 'POST',
-		dataType: 'text',
-		url: 'index.php',
-		data:"param="+JSON.stringify(ob)
-	  		success: function(html){
-	    		$(html).prependTo('#result');
-	  		}
-	});
+    $.ajax({
+        type: 'POST',
+        dataType: 'text',
+        url: 'index.php',
+        data:"param="+JSON.stringify(ob)
+            success: function(html){
+                $(html).prependTo('#result');
+            }
+    });
 });*/
 
 
 $( "#show" ).click(function() {
-  $(this).hide();
+    $(this).hide();
         $( "#hide" ).show();
 });
 
 $( "#hide" ).click(function() {
-  $(this).hide();
+    $(this).hide();
         $( "#show" ).show();
 });
