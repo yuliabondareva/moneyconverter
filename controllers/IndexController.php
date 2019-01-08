@@ -5,13 +5,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$sourceid = $_POST["sourceid"];
 	$currencies = $_POST["currencies"];
 
-	$ch = curl_init('http://apilayer.net/api/live?access_key=50ee15ca20b4da3b2a31bb2c0f47c884&currencies='.$currencies.'&source=USD&format=1');
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	$chIn = curl_init('http://apilayer.net/api/live?access_key=50ee15ca20b4da3b2a31bb2c0f47c884&currencies='.$currencies.'&source=USD&format=1');
+	$chOut = curl_init('http://apilayer.net/api/live?access_key=50ee15ca20b4da3b2a31bb2c0f47c884&currencies='.$sourceid.'&source=USD&format=1');
 
-	$json = curl_exec($ch);
-	curl_close($ch);
-	$exchangeRates = json_decode($json, true);
-	$myCur = $sourceid.$currencies;
-	$myCurFun = $exchangeRates['quotes'][$myCur]*$ammount;
-	$result = $ammount. ' USD = ' . $myCurFun.' '.$currencies;
+	curl_setopt($chIn, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($chOut, CURLOPT_RETURNTRANSFER, true);
+
+	$jsonIn = curl_exec($chIn);
+	$jsonOut = curl_exec($chOut);
+	curl_close($chIn);
+	curl_close($chOut);
+	$exchangeRatesIn = json_decode($jsonIn, true);
+	$exchangeRatesOut = json_decode($jsonOut, true);
+	$myCurIn = 'USD'.$currencies;
+	$myCurOut = 'USD'.$sourceid;
+	$exchangeIn = $exchangeRatesIn['quotes'][$myCurIn]."<br>";
+	$exchangeOut = $exchangeRatesOut['quotes'][$myCurOut];
+	$myCurFun = $exchangeIn/$exchangeOut*$ammount;
+	$crossCur = round($myCurFun, 2);
+	$result = $ammount.' '.$sourceid.' = '.$crossCur.' '.$currencies;
 }

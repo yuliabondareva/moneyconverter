@@ -11,6 +11,7 @@ a:hover,a:focus{
 .nav a{
  color: #7f8291;
  font-size: 16px;
+ margin: 0 15px;;
 }
 .nav a:hover{
  color: #7f8291;
@@ -41,11 +42,6 @@ th, td{
 .form-container{
  padding: 10px;
  }
-.form-input{
- -moz-appearance: none;
- -webkit-appearance: none;
- appearance: none;
-}
 .form-horizontal .form-group{
  margin: 10px;
  position: relative;
